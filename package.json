@@ -10,6 +10,7 @@
   "dependencies": {
     "@firebase/firestore": "^2.2.5",
     "expo": "~41.0.1",
+    "expo-image-picker": "^10.1.4",
     "expo-status-bar": "~1.0.4",
     "firebase": "^8.4.3",
     "hapi": "^18.1.0",
@@ -26,7 +27,8 @@
     "react-native-stack": "^1.0.0-alpha11",
     "react-native-tabs": "^1.0.9",
     "react-native-web": "^0.16.1",
-    "react-navigation": "^4.4.4"
+    "react-navigation": "^4.4.4",
+    "react-navigation-drawer": "^2.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

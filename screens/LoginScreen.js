@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, Alert, KeyboardAvoidingView, TouchableWithoutFeedback, StyleSheet, Platform, Keyboard, Modal, ScrollView } from 'react-native';
+import { Header } from 'react-native-elements'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import firebase from 'firebase';
 import Constants from 'expo-constants';
-import Header from '../components/Header';
 //import db from '../config';
 
 export default class LoginScreen extends React.Component {
@@ -24,7 +25,8 @@ export default class LoginScreen extends React.Component {
             try {
                 const response = await firebase.auth().signInWithEmailAndPassword(email,password)
                     .then(()=>{
-                        this.props.navigation.navigate('RequestBook')
+                        console.log('Login Successful')
+                        this.props.navigation.navigate('Calculate')
                     })
             } catch (error) {
                 switch (error.code) {
@@ -47,10 +49,13 @@ export default class LoginScreen extends React.Component {
     }
     render(){
         return(
+          <SafeAreaProvider>
             <KeyboardAvoidingView behavior={Platform.OS === "android" ? "padding" : "height"} style={[styles.container,{paddingTop:Constants.statusBarHeight}]}>
                 
                     <View>
-                        <Header/>
+                        <Header
+                          centerComponent={{ text: 'Lazy Alarm', style: { color: 'black', fontSize:18, margin: 10,fontWeight:"bold" }}}
+                          backgroundColor='#A32CC4'/>
                     <View style={{alignItems:'center'}}>
                       <Image
                           style={{width:250,height:250}}
@@ -95,6 +100,7 @@ export default class LoginScreen extends React.Component {
                     </View>
                 
             </KeyboardAvoidingView>
+          </SafeAreaProvider>
         );
     }
 }
@@ -116,7 +122,7 @@ const styles = StyleSheet.create({
         borderRadius:50,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#a32cc4',
+        backgroundColor:'#A32CC4',
         alignSelf: 'center'
     },
     inputView: {

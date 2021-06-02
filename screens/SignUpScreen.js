@@ -2,8 +2,9 @@ import * as React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, Alert, KeyboardAvoidingView, TouchableWithoutFeedback, StyleSheet, Platform, Keyboard, Modal, ScrollView } from 'react-native';
 import firebase from 'firebase';
 import Constants from 'expo-constants';
-import Header from '../components/Header';
-//import db from '../config';
+import { Header } from 'react-native-elements'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import db from '../config';
 
 export default class LoginScreen extends React.Component {
     constructor(){
@@ -67,6 +68,7 @@ export default class LoginScreen extends React.Component {
                                         style={[styles.login,{marginTop:10}]}
                                         onPress={()=>{
                                             this.userSignUp(this.state.email,this.state.password,this.state.confirmPassword)
+                                            this.props.navigation.navigate('Login')
                                         }}>
                                             <Text style={styles.loginText}>Register</Text>
                                     </TouchableOpacity>
@@ -109,16 +111,20 @@ export default class LoginScreen extends React.Component {
     }
     render(){
         return(
+            <SafeAreaProvider>
             <KeyboardAvoidingView behavior={Platform.OS === "android" ? "padding" : "height"} style={[styles.container,{paddingTop:Constants.statusBarHeight}]}>            
                     <View>
                       <View>
-                        <Header/>
+                        <Header
+                          centerComponent={{ text: 'Lazy Alarm', style: { color: 'black', fontSize:18, margin: 10,fontWeight:"bold" }}}
+                          backgroundColor='#A32CC4'/>
                       </View>
                       <View style={{alignSelf:'center',margin:20,borderWidth:10,borderColor:'#710193'}}>
                           {this.showModal()}
                       </View>
                     </View>
             </KeyboardAvoidingView>
+            </SafeAreaProvider>
         );
     }
 } 
@@ -134,7 +140,7 @@ const styles = StyleSheet.create({
         borderRadius:50,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#a32cc4',
+        backgroundColor:'#A32CC4',
         alignSelf: 'center'
     },
     modalInput: {
